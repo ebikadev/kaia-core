@@ -1,9 +1,10 @@
 # Entrypoint del backend.
 from fastapi import FastAPI
 from app.api.router import api_router
+from app.api.routes import schemas
 
 app = FastAPI(
-    title="Kaia Data Validator",
+    title="Kaia",
     version="0.1"
 )
 
