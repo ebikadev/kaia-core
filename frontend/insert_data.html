@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Insert Data</title>
+    <script src="api.js"></script>
+</head>
+
+<body>
+    <h2>Insert Data</h2>
+    <input id="table" placeholder="Table name">
+    <br>
+
+    <textarea id="data" placeholder='JSON data'></textarea>
+    <br>
+
+    <button onclick="insert()">Insert</button>
+    <script>
+
+        async function insert() {
+            const table = document.getElementById("table").value;
+            const data = JSON.parse(
+                document.getElementById("data").value
+            );
+
+            const result = await insertData(table, data);
+            console.log(result);
+            alert("Data inserted");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,56 +1,54 @@
-"""
-Este servicio se encargará de:
+""" services — The business logic
+Here lives the real system logic.
+This service will be responsible for:
+    - saving schemas
+    - retrieving schemas
 
-guardar schemas
-recuperar schemas
-
-El sistema utiliza un diccionario en memoria:
+That dictionary is a temporary in-memory database.
 
 schemas_db
-Ejemplo interno:
+Internal example:
 
-{
-   "customers": TableSchema(...)
-}
-Esto es temporal para desarrollo.
+    {
+       "customers": TableSchema(...)
+    }
+This is temporary for development.
 
-En futuros sprints lo moveremos a:
-
+In future sprints we'll move it to:
 BigQuery
 Postgres
 Firestore
-
 
 """
 
 from typing import Dict
 from app.models.table_schema import TableSchema
+from app.validator.schema_validator import validate_schema
 
-# Diccionario que actúa como base de datos en memoria
+# Dictionary that acts as an in-memory database
 schemas_db: Dict[str, TableSchema] = {}
 
-
 def create_schema(schema: TableSchema):
+
     """
-    Guarda un schema nuevo.
+    Saves a table schema.
     """
+    validate_schema(schema)
+
     schemas_db[schema.table_name] = schema
+
+    print("Stored schemas:", schemas_db)
+
     return schema
-
-
-def save_schema(schema):
-    """
-    Guarda un schema en memoria.
-    """
-
-    schemas_db[schema.table_name] = schema
-
-    print("Schemas almacenados:", schemas_db)
-
 
 def get_schema(table_name: str):
     """
-    Obtiene un schema por nombre de tabla.
+    Gets the schema of a table.
     """
-
     return schemas_db.get(table_name)
+
+def list_schemas():
+    """
+    Lists all registered tables.
+    """
+    return list(schemas_db.keys())

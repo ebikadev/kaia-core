@@ -4,7 +4,7 @@ from typing import List, Optional
 
 class ValidationErrorDetail(BaseModel):
     """
-    Representa un error específico encontrado durante la validación.
+    Represents a specific error found during validation.
     """
 
     column: Optional[str]
@@ -13,7 +13,7 @@ class ValidationErrorDetail(BaseModel):
 
 class ValidationResult(BaseModel):
     """
-    Resultado completo del proceso de validación.
+    Complete result of the validation process returned by the API.
     """
 
     table: str

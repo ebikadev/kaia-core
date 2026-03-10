@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Validate CSV</title>
+    <script src="api.js"></script>
+</head>
+
+<body>
+
+    <h2>Validate CSV</h2>
+    <input id="table" placeholder="Table name">
+    <br>
+    <input type="file" id="file">
+    <br>
+    <button onclick="validate()">Validate</button>
+
+    <script>
+        async function validate() {
+            const table = document.getElementById("table").value;
+            const file = document.getElementById("file").files[0];
+            const result = await validateCSV(table, file);
+            console.log(result);
+            alert(JSON.stringify(result));
+
+        }
+
+    </script>
+</body>
+
+</html>
